@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -6,6 +7,31 @@ import waterCompanionImg from '@/assets/water-companion.jpg';
 import parksnapImg from '@/assets/parksnap.jpg';
 import campusCopilotImg from '@/assets/campus-copilot.jpg';
 import ecommerceImg from '@/assets/ecommerce.jpg';
+
+// Component for clickable/toggleable technologies
+const ProjectTechnologies = ({ technologies }: { technologies: string[] }) => {
+  const [showAll, setShowAll] = useState(false);
+  const displayedTech = showAll ? technologies : technologies.slice(0, 4);
+
+  return (
+    <div className="flex flex-wrap gap-1">
+      {displayedTech.map((tech, idx) => (
+        <Badge key={idx} variant="outline" className="text-xs">
+          {tech}
+        </Badge>
+      ))}
+      {technologies.length > 4 && (
+        <Badge
+          variant="outline"
+          className="text-xs cursor-pointer hover:bg-primary/10"
+          onClick={() => setShowAll(!showAll)}
+        >
+          {showAll ? 'Show less' : `+${technologies.length - 4} more`}
+        </Badge>
+      )}
+    </div>
+  );
+};
 
 const Projects = () => {
   const projects = [
@@ -139,6 +165,12 @@ const Projects = () => {
     }
   ];
 
+  const [visibleCount, setVisibleCount] = useState(3); // Show 3 projects initially
+
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + 3); // Load 3 more projects each click
+  };
+
   return (
     <section id="projects" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -150,13 +182,13 @@ const Projects = () => {
             A showcase of my recent work in full-stack development, IoT systems, and AI-powered applications
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {projects.slice(0, visibleCount).map((project, index) => (
             <Card key={index} className="group overflow-hidden border-border bg-card shadow-card hover:shadow-glow transition-all duration-300">
               <div className="relative overflow-hidden">
-                <img 
-                  src={project.image} 
+                <img
+                  src={project.image}
                   alt={project.title}
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -172,7 +204,7 @@ const Projects = () => {
                   </Badge>
                 </div>
               </div>
-              
+
               <CardHeader>
                 <CardTitle className="text-xl group-hover:text-primary transition-colors">
                   {project.title}
@@ -181,9 +213,8 @@ const Projects = () => {
                   {project.description}
                 </CardDescription>
               </CardHeader>
-              
+
               <CardContent className="space-y-4">
-                {/* Key Highlights */}
                 <div>
                   <h4 className="text-sm font-semibold mb-2 text-accent">Key Features:</h4>
                   <ul className="text-xs text-muted-foreground space-y-1">
@@ -195,25 +226,12 @@ const Projects = () => {
                     ))}
                   </ul>
                 </div>
-                
-                {/* Technologies */}
+
                 <div>
                   <h4 className="text-sm font-semibold mb-2 text-accent">Technologies:</h4>
-                  <div className="flex flex-wrap gap-1">
-                    {project.technologies.slice(0, 4).map((tech, idx) => (
-                      <Badge key={idx} variant="outline" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                    {project.technologies.length > 4 && (
-                      <Badge variant="outline" className="text-xs">
-                        +{project.technologies.length - 4} more
-                      </Badge>
-                    )}
-                  </div>
+                  <ProjectTechnologies technologies={project.technologies} />
                 </div>
-                
-                {/* Action Buttons */}
+
                 <div className="flex gap-2 pt-2">
                   {project.github !== "#" && (
                     <Button variant="outline" size="sm" asChild className="flex-1">
@@ -236,11 +254,26 @@ const Projects = () => {
             </Card>
           ))}
         </div>
-        
-        <div className="text-center mt-12">
-          <Button 
-            variant="outline" 
-            size="lg" 
+
+        {/* Load More Button */}
+        {visibleCount < projects.length && (
+          <div className="text-center mt-12">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={handleLoadMore}
+              className="hover:bg-gradient-primary hover:text-primary-foreground transition-all duration-300"
+            >
+              Load More Projects
+            </Button>
+          </div>
+        )}
+
+        {/* GitHub Link */}
+        <div className="text-center mt-6">
+          <Button
+            variant="outline"
+            size="lg"
             asChild
             className="hover:bg-gradient-primary hover:text-primary-foreground transition-all duration-300"
           >

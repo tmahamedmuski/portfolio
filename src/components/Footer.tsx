@@ -15,12 +15,12 @@ const Footer = () => {
   const socialLinks = [
     { 
       name: 'GitHub', 
-      href: 'https://github.com/ahamedmuski', 
+      href: 'https://github.com/muskitma', 
       icon: Github 
     },
     { 
       name: 'LinkedIn', 
-      href: 'https://linkedin.com/in/ahamed-muski', 
+      href: 'https://www.linkedin.com/in/ahamed-muski-a23b09326/', 
       icon: Linkedin 
     },
     { 
@@ -122,7 +122,7 @@ const Footer = () => {
                 📧 tm.ahamedmuski@gmail.com
               </p>
               <p className="text-sm text-muted-foreground">
-                📱 0776260935
+                📱 0776620955
               </p>
             </div>
           </div>

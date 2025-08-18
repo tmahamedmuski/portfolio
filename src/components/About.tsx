@@ -52,7 +52,7 @@ const About = () => {
                     <h3 className="font-semibold text-lg mb-2">Contact Information</h3>
                     <div className="space-y-2 text-sm text-muted-foreground">
                       <p>📧 tm.ahamedmuski@gmail.com</p>
-                      <p>📱 0776260935</p>
+                      <p>📱 0776620955</p>
                       <p>🌐 LinkedIn: Ahamed Muski</p>
                       <p>💻 GitHub: @ahamedmuski</p>
                     </div>

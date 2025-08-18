@@ -4,41 +4,41 @@ import heroBg from '@/assets/hero-bg.avif';
 import profileImage from '@/assets/profile-placeholder.png';
 
 const Hero = () => {
-    const scrollToSection = (id: string) => {
+  const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
-    };
+  };
 
-    return (
+  return (
     <section 
-        id="home"
-        className="min-h-screen flex items-center justify-center relative overflow-hidden"
-        style={{
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      style={{
         backgroundImage: `url(${heroBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
-        }}
+      }}
     >
       {/* Overlay */}
-        <div className="absolute inset-0 bg-background/80" />
-        
-        {/* Content */}
-        <div className="container mx-auto px-4 relative z-10">
+      <div className="absolute inset-0 bg-background/80" />
+      
+      {/* Content */}
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           {/* Profile Image */}
-            <div className="mb-8 flex justify-center">
+          <div className="mb-8 flex justify-center">
             <div className="relative">
-                <img 
-                    src={profileImage}
+              <img 
+                src={profileImage}
                 alt="Ahamed Muski"
                 className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-primary shadow-glow animate-float"
-                />
-                <div className="absolute inset-0 rounded-full bg-gradient-primary opacity-20 animate-glow" />
+              />
+              <div className="absolute inset-0 rounded-full bg-gradient-primary opacity-20 animate-glow" />
             </div>
-            </div>
-            
+          </div>
+          
           {/* Main Content */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent animate-fade-in">
             Ahamed Muski
@@ -56,12 +56,12 @@ const Hero = () => {
           {/* Social Links */}
           <div className="flex justify-center space-x-4 mb-8 animate-fade-in" style={{ animationDelay: '0.6s' }}>
             <Button variant="outline" size="icon" asChild>
-              <a href="https://github.com/ahamedmuski" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/muskitma" target="_blank" rel="noopener noreferrer">
                 <Github size={20} />
               </a>
             </Button>
             <Button variant="outline" size="icon" asChild>
-              <a href="https://linkedin.com/in/ahamed-muski" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/ahamed-muski-a23b09326/" target="_blank" rel="noopener noreferrer">
                 <Linkedin size={20} />
               </a>
             </Button>
@@ -70,10 +70,12 @@ const Hero = () => {
                 <ExternalLink size={20} />
               </a>
             </Button>
-            <Button variant="outline" size="icon" asChild>
-              <a href="tm.ahamedmuski@gmail.com">
-                <Mail size={20} />
-              </a>
+            <Button 
+              variant="outline" 
+              size="icon"
+              onClick={() => scrollToSection('contact')}
+            >
+              <Mail size={20} />
             </Button>
           </div>
           
