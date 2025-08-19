@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Download } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.avif';
 import profileImage from '@/assets/profile-placeholder.png';
 
@@ -94,6 +94,13 @@ const Hero = () => {
               onClick={() => scrollToSection('contact')}
             >
               Get In Touch
+            </Button>
+            <Button>
+              <Download>
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                  Download Resume
+                </a>
+              </Download>
             </Button>
           </div>
         </div>
