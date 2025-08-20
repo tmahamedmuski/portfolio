@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Github, Linkedin, Mail, ExternalLink, Download } from 'lucide-react';
+import CV from '@/assets/CV.svg';
 import heroBg from '@/assets/hero-bg.avif';
 import profileImage from '@/assets/profile-placeholder.png';
 
@@ -95,12 +96,15 @@ const Hero = () => {
             >
               Get In Touch
             </Button>
-            <Button>
-              <Download>
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-                  Download Resume
-                </a>
-              </Download>
+            <Button size="lg" className="bg-gradient-primary hover:shadow-glow transition-all duration-300" >
+              <Download size={20}/>
+              <a
+                href={CV}
+                download
+                style={{ color: 'inherit', textDecoration: 'none' }}
+                >
+                Download CV
+              </a>
             </Button>
           </div>
         </div>
