@@ -7,6 +7,10 @@ import waterCompanionImg from '@/assets/water-companion.jpg';
 import parksnapImg from '@/assets/parksnap.jpg';
 import campusCopilotImg from '@/assets/campus-copilot.jpg';
 import ecommerceImg from '@/assets/ecommerce.jpg';
+import chatAppImg from '@/assets/chat-app.png';
+import movieAppImg from '@/assets/movie-app.png';
+import studentDashboardImg from '@/assets/student-dashboard.png';
+import translationToolImg from '@/assets/translation-tool.png';
 
 // Component for clickable/toggleable technologies
 const ProjectTechnologies = ({ technologies }: { technologies: string[] }) => {
@@ -70,7 +74,7 @@ const Projects = () => {
     {
       title: "Chat Box Website",
       description: "Simple and interactive chat box website hosted on GitHub Pages. Built with vanilla web technologies focusing on real-time user interaction and clean design.",
-      image: ecommerceImg,
+      image: chatAppImg,
       technologies: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
       category: "Frontend Web",
       date: "2024",
@@ -102,7 +106,7 @@ const Projects = () => {
     {
       title: "Filmlane - Movie Website",
       description: "Sleek and user-friendly movie browsing website with modern touch. Features clean responsive design, movie search & filtering, and intuitive navigation for film enthusiasts.",
-      image: ecommerceImg,
+      image: movieAppImg,
       technologies: ["JavaScript", "HTML", "CSS", "Responsive Design"],
       category: "Frontend Web",
       date: "2024",
@@ -118,7 +122,7 @@ const Projects = () => {
     {
       title: "Student Registration System",
       description: "Laravel-based education website focusing on student registration system. Features secure registration, responsive interface, and efficient database management with MySQL.",
-      image: ecommerceImg,
+      image: studentDashboardImg,
       technologies: ["Laravel", "PHP", "MySQL", "JavaScript", "XAMPP", "Blade"],
       category: "Full Stack Web",
       date: "2024",
@@ -150,7 +154,7 @@ const Projects = () => {
     {
       title: "Translation Inventory Tool",
       description: "Award-winning translation management platform developed in collaboration with GTN Tech and University of Moratuwa. Features NLP-powered semantic translation memory and RTL language support.",
-      image: ecommerceImg,
+      image: translationToolImg,
       technologies: ["React", "Node.js", "MongoDB", "JWT", "Socket.IO", "NLP"],
       category: "Enterprise Collaboration",
       date: "2024",

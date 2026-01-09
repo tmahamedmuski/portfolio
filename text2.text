@@ -1,30 +1,78 @@
+import sys
 from collections import Counter
 
-def min_window(s: str, t: str) -> str:
-    if not s or not t:
-        return ""
-    need = Counter(t)
-    missing = len(t)
-    left = start = end = 0
+# Category ranks (lower number = stronger)
+QUINTESSENTIAL = 0
+PALINDROME = 1
+ORDERED = 2
+TRIO = 3
+DUO = 4
+STANDARD = 5
 
-    for right, char in enumerate(s):
-        if need[char] > 0:
-            missing -= 1
-        need[char] -= 1
+def letter_value(c):
+    # 'A' < ... < 'Z'
+    return ord(c) - ord('A')
 
-        if missing == 0:
-            while left < right and need[s[left]] < 0:
-                need[s[left]] += 1
-                left += 1
-            if end == 0 or right - left < end - start:
-                start, end = left, right + 1
-            need[s[left]] += 1
-            missing += 1
-            left += 1
+def is_quintessential(w):
+    return len(w) >= 5 and len(set(w)) == 1
 
-    return s[start:end]
+def is_palindrome(w):
+    return len(w) >= 3 and w == w[::-1]
 
-if __name__ == "__main__":
-    s = input().strip()
-    t = input().strip()
-    print(min_window(s,
+def is_ordered(w):
+    # Non-decreasing (allows equals)
+    return all(w[i] <= w[i+1] for i in range(len(w) - 1))
+
+def classify(w):
+    """Return (category_rank, tiebreak_key). Lower rank is stronger.
+    Larger key is better when ranks are equal."""
+    if is_quintessential(w):
+        return (QUINTESSENTIAL, letter_value(w[0]))
+    if is_palindrome(w):
+        return (PALINDROME, (len(w), w))
+    if is_ordered(w):
+        return (ORDERED, (len(w), letter_value(max(w)) if w else -1))
+
+    cnt = Counter(w)
+    counts = list(cnt.values())
+
+    # Trio: exactly one letter appears 3 times, all others once
+    if counts.count(3) == 1 and all(c in (1, 3) for c in counts):
+        trio_letter = max((ch for ch in cnt if cnt[ch] == 3), key=letter_value)
+        return (TRIO, letter_value(trio_letter))
+
+    # Duo: exactly one letter appears 2 times, all others once
+    if counts.count(2) == 1 and all(c in (1, 2) for c in counts):
+        pair_letter = max((ch for ch in cnt if cnt[ch] == 2), key=letter_value)
+        return (DUO, letter_value(pair_letter))
+
+    # Standard: tiebreak by lex order (later wins)
+    return (STANDARD, w)
+
+def compare_words(a, b):
+    """Return -1 if a<b (white wins), 0 if tie, +1 if a>b (black wins)."""
+    ca, ka = classify(a)
+    cb, kb = classify(b)
+
+    if ca != cb:
+        return 1 if ca < cb else -1
+    if ka != kb:
+        return 1 if ka > kb else -1
+    return 0
+
+def main():
+    for line in sys.stdin:
+        line = line.strip()
+        if not line:
+            continue
+        black, white = line.split()
+        res = compare_words(black, white)
+        if res > 0:
+            print("Black wins.")
+        elif res < 0:
+            print("White wins.")
+        else:
+            print("Tie.")
+
+if _name_ == "_main_":
+    main()

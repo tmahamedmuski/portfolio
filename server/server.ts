@@ -34,8 +34,9 @@ app.post("/api/contact", async (req, res) => {
     });
 
     const mailOptions = {
-      from: email,
+      from: `"${name}" <${process.env.EMAIL_USER}>`, // Send FROM the authenticated user (prevents Gmail blocking)
       to: process.env.EMAIL_USER,
+      replyTo: email, // Allow replying to the visitor
       subject: `Contact Form: ${subject}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage:\n${message}`
     };
@@ -51,6 +52,6 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(Number(PORT), "0.0.0.0", () => {
+  console.log(`Server running on http://127.0.0.1:${PORT}`);
 });

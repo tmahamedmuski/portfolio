@@ -4,12 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Github, 
-  Linkedin, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
   ExternalLink,
   Send
 } from 'lucide-react';
@@ -29,7 +29,7 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/page/api/contact', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -48,6 +48,7 @@ const Contact = () => {
 
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error: any) {
+      console.error("Contact Form Error:", error);
       toast({
         title: 'Error',
         description: error.message || 'Something went wrong',
